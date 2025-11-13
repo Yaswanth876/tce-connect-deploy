@@ -1,0 +1,335 @@
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable-next-line at-rule-no-unknown */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  * {
+    scroll-behavior: smooth;
+  }
+
+  :root {
+    /* TCE Official Colors - Maroon & Gold Theme */
+    --background: 0 0% 98%;
+    --foreground: 0 50% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 50% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 50% 15%;
+
+    /* TCE Maroon Primary (inspired by tce.edu) */
+    --primary: 0 65% 35%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 0 65% 45%;
+    --primary-dark: 0 65% 25%;
+    
+    /* TCE Gold Accent */
+    --accent: 45 100% 50%;
+    --accent-foreground: 0 65% 25%;
+    --accent-light: 45 100% 65%;
+
+    --secondary: 0 20% 96%;
+    --secondary-foreground: 0 65% 25%;
+
+    --muted: 30 15% 95%;
+    --muted-foreground: 30 10% 45%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 15% 88%;
+    --input: 30 15% 90%;
+    --ring: 0 65% 35%;
+
+    --radius: 0.5rem;
+    
+    /* TCE Custom shadows with maroon tint */
+    --shadow-sm: 0 2px 8px rgba(128, 32, 32, 0.08);
+    --shadow-md: 0 4px 16px rgba(128, 32, 32, 0.12);
+    --shadow-lg: 0 8px 24px rgba(128, 32, 32, 0.16);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 0 50% 15%;
+
+    --sidebar-primary: 0 65% 35%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 30 20% 95%;
+
+    --sidebar-accent-foreground: 0 65% 35%;
+
+    --sidebar-border: 30 15% 88%;
+
+    --sidebar-ring: 0 65% 35%;
+  }
+
+  .dark {
+    --background: 0 50% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 50% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 50% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 65% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 0 65% 55%;
+
+    --accent: 51 100% 50%;
+    --accent-foreground: 216 100% 25%;
+    --accent-light: 51 100% 60%;
+
+    --secondary: 216 30% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 15% 20%;
+    --muted-foreground: 220 10% 65%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 25%;
+    --input: 220 15% 25%;
+    --ring: 216 100% 45%;
+    
+    --sidebar-background: 216 100% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 216 100% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 216 30% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 15% 25%;
+    --sidebar-ring: 216 100% 45%;
+  }
+}
+@layer base {
+  * {
+    /* stylelint-disable-next-line at-rule-no-unknown */
+    @apply border-border;
+  }
+
+  body {
+    /* stylelint-disable-next-line at-rule-no-unknown */
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+  
+  h4 {
+    font-size: 1.125rem;
+  }
+  
+  h5, h6 {
+    font-size: 1rem;
+  }
+}
+
+@layer utilities {
+  .shadow-card {
+    box-shadow: var(--shadow-md);
+  }
+  
+  .shadow-card-hover {
+    box-shadow: var(--shadow-lg);
+  }
+  
+  /* Hide scrollbar for horizontal scroll */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Smooth animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+  
+  /* Page transition animation */
+  .page-transition {
+    animation: pageTransition 0.3s ease-out;
+  }
+  
+  /* Button enhancements */
+  button, .btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  button:hover, .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(128, 32, 32, 0.2);
+  }
+  
+  button:active, .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(128, 32, 32, 0.15);
+  }
+  
+  /* Button ripple effect */
+  button::before, .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  button:active::before, .btn:active::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  /* Button hover animations */
+  .btn-bounce:hover {
+    animation: btnBounce 0.5s ease;
+  }
+  
+  .btn-pulse {
+    animation: btnPulse 2s ease-in-out infinite;
+  }
+  
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-shine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+  }
+  
+  .btn-shine:hover::after {
+    left: 100%;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Glass effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .dark .glass-effect {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pageTransition {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes btnBounce {
+  0%, 100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes btnPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(128, 32, 32, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(128, 32, 32, 0);
+  }
+}
