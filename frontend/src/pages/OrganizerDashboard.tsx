@@ -16,6 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import API_BASE_URL from "@/config/api";
 
 export default function OrganizerDashboard() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export default function OrganizerDashboard() {
   useEffect(() => {
     if (!token) return;
     setLoading(true);
-    fetch("http://localhost:5000/api/events", {
+    fetch(`${API_BASE_URL}/events`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -77,7 +78,7 @@ export default function OrganizerDashboard() {
     setLoading(true);
     
     try {
-      const response = await fetch("http://localhost:5000/api/events", {
+      const response = await fetch(`${API_BASE_URL}/events`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +120,7 @@ export default function OrganizerDashboard() {
       });
       
       // Refresh events list
-      const eventsRes = await fetch("http://localhost:5000/api/events", {
+      const eventsRes = await fetch(`${API_BASE_URL}/events`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const eventsData = await eventsRes.json();
@@ -144,7 +145,7 @@ export default function OrganizerDashboard() {
     setLoading(true);
     
     try {
-      const response = await fetch(`http://localhost:5000/api/events/${editingEvent._id}`, {
+      const response = await fetch(`${API_BASE_URL}/events/${editingEvent._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -187,7 +188,7 @@ export default function OrganizerDashboard() {
       });
       
       // Refresh events list
-      const eventsRes = await fetch("http://localhost:5000/api/events", {
+      const eventsRes = await fetch(`${API_BASE_URL}/events`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const eventsData = await eventsRes.json();
@@ -212,7 +213,7 @@ export default function OrganizerDashboard() {
     setLoading(true);
     
     try {
-      const response = await fetch(`http://localhost:5000/api/events/${eventId}`, {
+      const response = await fetch(`${API_BASE_URL}/events/${eventId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });

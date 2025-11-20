@@ -7,6 +7,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import API_BASE_URL from "@/config/api";
 
 const Profile = () => {
   const [user, setUser] = useState<any>(null);
@@ -20,7 +21,7 @@ const Profile = () => {
     setIsLoading(true);
     
     // Fetch user profile
-    fetch("http://localhost:5000/api/users/me", {
+    fetch(`${API_BASE_URL}/users/me`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -34,7 +35,7 @@ const Profile = () => {
       });
     
     // Fetch registered events
-    fetch("http://localhost:5000/api/users/me/events", {
+    fetch(`${API_BASE_URL}/users/me/events`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())

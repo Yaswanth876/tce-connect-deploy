@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import API_BASE_URL from "@/config/api";
 
 // Mock event data - matching all events from Events page
 const mockEvents = [
@@ -610,7 +611,7 @@ export default function EventDetails() {
   // Fetch event from API
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/api/events/${id}`)
+    fetch(`${API_BASE_URL}/events/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Event not found (Status: ${res.status})`);
@@ -672,7 +673,7 @@ export default function EventDetails() {
     setRegistering(true);
 
     try {
-      const url = `http://localhost:5000/api/events/${id}/register`;
+      const url = `${API_BASE_URL}/events/${id}/register`;
       const method = isRegistered ? "DELETE" : "POST";
       
       const response = await fetch(url, {

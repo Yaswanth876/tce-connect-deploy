@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Calendar, Users, Award, TrendingUp, MapPin } from "lucide-react";
 import { toast } from "sonner";
+import API_BASE_URL from "@/config/api";
 
 export default function StudentDashboard() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function StudentDashboard() {
     if (!token) return;
 
     setLoading(true);
-    fetch("http://localhost:5000/api/users/me/events", {
+    fetch(`${API_BASE_URL}/users/me/events`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

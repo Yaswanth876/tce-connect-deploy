@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Mail, Lock, LogIn } from "lucide-react";
 import { toast } from "sonner";
+import API_BASE_URL from "@/config/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -60,7 +61,7 @@ export default function Login() {
     setIsLoading(true);
     
     try {
-      const response = await fetch("http://localhost:5000/api/users/login", {
+      const response = await fetch(`${API_BASE_URL}/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

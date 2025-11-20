@@ -8,6 +8,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
+import API_BASE_URL from "@/config/api";
 
 const filters = ["All", "Technical", "Cultural", "Sports"];
 
@@ -21,7 +22,7 @@ const Events = () => {
   useEffect(() => {
     setLoading(true);
     setError("");
-    fetch("http://localhost:5000/api/events")
+    fetch(`${API_BASE_URL}/events`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -169,7 +170,7 @@ function EventForm({ onCreated }: { onCreated: () => void }) {
     setIsLoading(true);
     setError("");
     try {
-      const response = await fetch("http://localhost:5000/api/events", {
+      const response = await fetch(`${API_BASE_URL}/events`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

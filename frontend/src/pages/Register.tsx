@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { UserPlus, Mail, Lock, User, Building, Calendar, Hash } from "lucide-react";
+import API_BASE_URL from "@/config/api";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -117,7 +118,7 @@ export default function Register() {
     setIsLoading(true);
     
     try {
-      const response = await fetch("http://localhost:5000/api/users/register", {
+      const response = await fetch(`${API_BASE_URL}/users/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 

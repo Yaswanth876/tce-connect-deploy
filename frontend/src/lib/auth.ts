@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import API_BASE_URL from "@/config/api";
 
 /**
  * Check if user is authenticated with valid JWT token
@@ -11,7 +12,7 @@ export const isAuthenticated = async (): Promise<boolean> => {
   }
 
   try {
-    const response = await fetch("http://localhost:5000/api/users/me", {
+    const response = await fetch(`${API_BASE_URL}/users/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

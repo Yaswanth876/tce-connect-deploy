@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Settings as SettingsIcon, Bell, Lock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import API_BASE_URL from "@/config/api";
 
 export default function Settings() {
   const [user, setUser] = useState<any>(null);
@@ -22,7 +23,7 @@ export default function Settings() {
     if (!token) return;
     
     // Fetch user profile
-    fetch("http://localhost:5000/api/users/me", {
+    fetch(`${API_BASE_URL}/users/me`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -58,7 +59,7 @@ export default function Settings() {
     const token = localStorage.getItem("tce_token");
     
     try {
-      const response = await fetch("http://localhost:5000/api/users/me/password", {
+      const response = await fetch(`${API_BASE_URL}/users/me/password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
