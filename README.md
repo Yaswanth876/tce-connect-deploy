@@ -1,52 +1,75 @@
-<div align="center"># TCE Connect
+# TCE Connect - Production Deployment
 
-  <h1>🎓 TCE Connect</h1>
+## ⚠️ Important Notice
 
-  <p><strong>A Modern Campus Event & Club Management Platform</strong></p>A full-stack campus event and club management platform for TCE, built with React (frontend), Node.js + Express.js (backend), and MongoDB Atlas (cloud database).
+This repository is configured **ONLY for production deployment** on:
+- **Backend**: Render
+- **Frontend**: Vercel
 
-  <p>Built for Thiagarajar College of Engineering</p>
+**DO NOT run this project locally for development.**
 
-  ## Project Structure
+---
 
-  ![React](https://img.shields.io/badge/React-18.3-blue?logo=react)```
+## 🚀 Quick Deployment Guide
 
-  ![Node.js](https://img.shields.io/badge/Node.js-22.x-green?logo=node.js)tce-connect/
+### Prerequisites
+1. MongoDB Atlas account with production cluster
+2. Render account
+3. Vercel account
+4. GitHub repository
 
-  ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?logo=mongodb)  frontend/   # React + Vite web app
+### Step 1: Generate JWT Secret
+```powershell
+-join ((65..90) + (97..122) + (48..57) | Get-Random -Count 32 | % {[char]$_})
+```
+Save the output!
 
-  ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)  backend/    # Node.js + Express.js API server
+### Step 2: Push to GitHub
+```powershell
+git add .
+git commit -m "Production deployment"
+git push origin main
+```
 
-  ![License](https://img.shields.io/badge/License-MIT-yellow)  README.md   # Project overview (this file)
+### Step 3: Deploy to Render
+1. Go to https://dashboard.render.com
+2. New Web Service → Connect GitHub repo
+3. Configure:
+   - Root Directory: `backend`
+   - Build: `npm install`
+   - Start: `npm start`
+4. Add Environment Variables (from `backend/.env`):
+   ```
+   MONGODB_URI=<your-production-mongodb-uri>
+   JWT_SECRET=<generated-secret-from-step-1>
+   NODE_ENV=production
+   PORT=5000
+   FRONTEND_URL=https://tce-connect.vercel.app
+   ```
 
-</div>```
+### Step 4: Deploy to Vercel
+```powershell
+cd frontend
+npm install -g vercel
+vercel --prod
+```
+Or use Vercel Dashboard
 
+### Step 5: Update URLs
+1. Update `FRONTEND_URL` in Render with your Vercel URL
+2. Verify `frontend/.env.production` has your Render backend URL
 
+---
 
----## Features
+## 📚 Full Documentation
+- [`DEPLOYMENT.md`](DEPLOYMENT.md) - Complete deployment guide
+- [`PRODUCTION_CHECKLIST.md`](PRODUCTION_CHECKLIST.md) - Step-by-step checklist
 
-- Student and organizer authentication
+## 🎯 Tech Stack
+- **Frontend**: React + TypeScript + Vite + Tailwind CSS
+- **Backend**: Node.js + Express.js + MongoDB Atlas
+- **Deployment**: Vercel (Frontend) + Render (Backend)
 
-## 📖 Table of Contents- Event listing, registration, and management
-
-- Club directory and details
-
-- [About](#-about)- Responsive, modern UI (React + Tailwind CSS)
-
-- [Features](#-features)- RESTful backend API (Node.js, Express.js)
-
-- [Tech Stack](#-tech-stack)- Cloud database (MongoDB Atlas)
-
-- [Project Structure](#-project-structure)
-
-- [Getting Started](#-getting-started)## Getting Started
-
-- [Documentation](#-documentation)
-
-- [Testing](#-testing)### 1. Frontend Setup
-
-- [Deployment](#-deployment)- See `frontend/README.md` for instructions
-
-- [Contributing](#-contributing)
 
 - [License](#-license)### 2. Backend Setup
 
