@@ -54,6 +54,10 @@ app.use('/api/events', eventRoutes);
 const clubRoutes = require('./routes/club');
 app.use('/api/clubs', clubRoutes);
 
+// Admin routes
+const adminRoutes = require('./routes/admin');
+app.use('/api/admin', adminRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

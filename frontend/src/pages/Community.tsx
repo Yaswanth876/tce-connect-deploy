@@ -96,42 +96,42 @@ const Community = () => {
     <div className="flex flex-col min-h-screen bg-background page-transition">
       <Navbar />
       <div className="flex-1 pb-20 lg:pb-0">
-        {/* Header with consistent theme */}
-        <header className="bg-white border-b border-border p-4 lg:p-6 animate-fade-in shadow-md">
-          <div className="max-w-5xl mx-auto space-y-3">
-          <h1 className="text-xl font-bold text-foreground flex items-center gap-2 animate-slide-up opacity-0" style={{ animationFillMode: 'forwards' }}>
-            <Sparkles className="h-6 w-6 text-primary" />
+        {/* Header with consistent theme - Mobile Optimized */}
+        <header className="bg-white/95 backdrop-blur-md border-b border-border px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-6 animate-fade-in shadow-md sticky top-0 z-10">
+          <div className="max-w-5xl mx-auto space-y-1.5 sm:space-y-2 lg:space-y-3">
+          <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground flex items-center gap-2 animate-slide-up opacity-0" style={{ animationFillMode: 'forwards' }}>
+            <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary flex-shrink-0" />
             <span className="text-primary">TCE</span> Clubs
           </h1>
-          <p className="text-sm text-muted-foreground animate-slide-up opacity-0" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>A Vibrant Hub for Innovation, Culture, and Community</p>
+          <p className="text-xs sm:text-sm text-muted-foreground animate-slide-up opacity-0" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>A Vibrant Hub for Innovation, Culture, and Community</p>
           </div>
         </header>
 
-        {/* Info Banner - clubs.tceapps.in style */}
-        <div className="max-w-5xl mx-auto px-4 lg:px-6 py-6">
-          <div className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-lg p-6 mb-6 border border-primary/10 animate-fade-in opacity-0" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-            <div className="grid md:grid-cols-3 gap-4 text-center">
-              <div className="space-y-2">
-                <Code2 className="h-10 w-10 mx-auto text-primary" />
-                <h3 className="font-semibold text-primary">Tech & Innovation</h3>
-                <p className="text-sm text-muted-foreground">Innovate, code, and build with cutting-edge tech</p>
+        {/* Info Banner - clubs.tceapps.in style - Mobile Optimized */}
+        <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
+          <div className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 border border-primary/10 animate-fade-in opacity-0 shadow-sm" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
+            <div className="grid grid-cols-1 xs:grid-cols-3 gap-4 sm:gap-6 text-center">
+              <div className="space-y-1.5 sm:space-y-2">
+                <Code2 className="h-8 w-8 sm:h-10 sm:w-10 mx-auto text-primary" />
+                <h3 className="font-semibold text-sm sm:text-base text-primary">Tech & Innovation</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">Innovate, code, and build with cutting-edge tech</p>
               </div>
-              <div className="space-y-2">
-                <Drama className="h-10 w-10 mx-auto text-primary" />
-                <h3 className="font-semibold text-primary">Arts & Culture</h3>
-                <p className="text-sm text-muted-foreground">Express your passion on every stage and field</p>
+              <div className="space-y-1.5 sm:space-y-2">
+                <Drama className="h-8 w-8 sm:h-10 sm:w-10 mx-auto text-primary" />
+                <h3 className="font-semibold text-sm sm:text-base text-primary">Arts & Culture</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">Express your passion on every stage and field</p>
               </div>
-              <div className="space-y-2">
-                <Handshake className="h-10 w-10 mx-auto text-primary" />
-                <h3 className="font-semibold text-primary">Community Impact</h3>
-                <p className="text-sm text-muted-foreground">Make a difference through social causes</p>
+              <div className="space-y-1.5 sm:space-y-2">
+                <Handshake className="h-8 w-8 sm:h-10 sm:w-10 mx-auto text-primary" />
+                <h3 className="font-semibold text-sm sm:text-base text-primary">Community Impact</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">Make a difference through social causes</p>
               </div>
             </div>
           </div>
 
-        {/* Clubs List with staggered animations */}
+        {/* Clubs List with staggered animations - Mobile Grid */}
           {allClubs.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
               {allClubs.map((club, index) => (
                 <div 
                   key={index}
@@ -146,10 +146,10 @@ const Community = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 text-muted-foreground animate-fade-in">
-              <Users className="h-16 w-16 mx-auto mb-4 text-muted-foreground/50" />
-              <p className="text-lg">You haven't joined any clubs yet</p>
-              <p className="text-sm mt-2">Explore clubs to get started!</p>
+            <div className="text-center py-12 sm:py-16 text-muted-foreground animate-fade-in px-4">
+              <Users className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-3 sm:mb-4 text-muted-foreground/50" />
+              <p className="text-base sm:text-lg font-medium">You haven't joined any clubs yet</p>
+              <p className="text-xs sm:text-sm mt-1 sm:mt-2">Explore clubs to get started!</p>
             </div>
           )}
         </div>

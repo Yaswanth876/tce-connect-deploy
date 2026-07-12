@@ -82,25 +82,25 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white text-foreground shadow-lg sticky top-0 z-50 backdrop-blur-sm border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo - Enhanced */}
-          <a href="/" className="flex items-center gap-2 group">
+    <nav className="bg-white/95 text-foreground shadow-lg sticky top-0 z-50 backdrop-blur-md border-b border-border">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16">
+          {/* Logo - Enhanced for Mobile */}
+          <a href="/" className="flex items-center gap-1.5 sm:gap-2 group">
             <div className="relative">
               <div className="absolute inset-0 bg-primary/10 rounded-full blur-md group-hover:bg-primary/20 transition-all"></div>
               <img 
                 src="/tce-logo.png" 
                 alt="TCE Logo" 
-                className="h-10 w-10 object-contain relative z-10 group-hover:scale-110 transition-transform duration-300"
+                className="h-8 w-8 sm:h-10 sm:w-10 object-contain relative z-10 group-hover:scale-110 transition-transform duration-300"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                 }}
               />
             </div>
-            <div className="text-lg font-bold flex items-center gap-2">
+            <div className="text-base sm:text-lg font-bold flex items-center gap-1 sm:gap-2">
               <span className="text-primary group-hover:scale-110 transition-transform duration-300">TCE</span>
-              <span className="text-foreground transition-all duration-300">Connect</span>
+              <span className="text-foreground transition-all duration-300 hidden xs:inline">Connect</span>
             </div>
           </a>
 
@@ -166,86 +166,120 @@ export const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button - Improved */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-foreground hover:bg-primary/10 transition-all duration-300 hover:scale-110 rounded-xl"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6 rotate-90 transition-transform duration-300" />
-            ) : (
-              <Menu className="h-6 w-6 transition-transform duration-300" />
+          {/* Mobile Menu Button - Improved with Badge */}
+          <div className="flex items-center gap-2 md:hidden">
+            {isAuthenticated && (
+              <div className="flex items-center gap-1 px-2 py-1 bg-primary/10 rounded-full">
+                <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-xs font-medium text-primary hidden xs:inline">{userRole}</span>
+              </div>
             )}
-          </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-foreground hover:bg-primary/10 transition-all duration-300 hover:scale-110 rounded-xl h-9 w-9"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? (
+                <X className="h-5 w-5 sm:h-6 sm:w-6 rotate-90 transition-transform duration-300" />
+              ) : (
+                <Menu className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300" />
+              )}
+            </Button>
+          </div>
         </div>
 
-        {/* Mobile Menu - Improved */}
+        {/* Mobile Menu - Improved with Better UX */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-2 animate-slide-up border-t border-border bg-white">
-            {navItems.map((item) => (
+          <div className="md:hidden py-3 space-y-1 animate-slide-up border-t border-border bg-white/95 backdrop-blur-md">
+            {/* User Info Card - Mobile */}
+            {isAuthenticated && (
+              <div className="mx-2 mb-3 p-3 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
+                    <User className="h-5 w-5 text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm text-foreground truncate">{userEmail}</p>
+                    <p className="text-xs text-muted-foreground capitalize flex items-center gap-1">
+                      <span className="h-1.5 w-1.5 bg-green-500 rounded-full"></span>
+                      {userRole}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Navigation Links */}
+            {navItems.map((item, index) => (
               <NavLink
                 key={item.path}
                 to={item.path}
                 end
-                className="flex items-center justify-center px-4 py-2 rounded-lg text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium border border-transparent text-sm"
-                activeClassName="text-primary font-bold border-primary bg-transparent"
+                className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium border border-transparent text-sm group"
+                activeClassName="text-primary font-bold border-primary/30 bg-primary/5"
                 onClick={() => setMobileMenuOpen(false)}
+                style={{ animationDelay: `${index * 0.05}s` }}
               >
+                <item.icon className="h-4 w-4 group-hover:scale-110 transition-transform" />
                 <span>{item.label}</span>
               </NavLink>
-              ))}
+            ))}
             
             {isAuthenticated ? (
               <>
-                <div className="px-4 py-2 mx-2 text-sm border-t border-border mt-2">
-                  <p className="font-medium text-foreground">{userEmail}</p>
-                  <p className="text-xs text-muted-foreground capitalize">{userRole}</p>
-                </div>
+                <div className="h-px bg-border mx-2 my-2"></div>
+                
                 <button
                   onClick={handleDashboard}
-                  className="flex items-center justify-center w-full px-4 py-2 rounded-lg text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium text-sm"
+                  className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium text-sm group"
                 >
-                  <LayoutDashboard className="h-4 w-4 mr-2" />
-                  Dashboard
+                  <LayoutDashboard className="h-4 w-4 group-hover:scale-110 transition-transform" />
+                  <span>Dashboard</span>
                 </button>
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     navigate("/profile");
                   }}
-                  className="flex items-center justify-center w-full px-4 py-2 rounded-lg text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium text-sm"
+                  className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium text-sm group"
                 >
-                  <User className="h-4 w-4 mr-2" />
-                  My Profile
+                  <User className="h-4 w-4 group-hover:scale-110 transition-transform" />
+                  <span>My Profile</span>
                 </button>
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     navigate("/settings");
                   }}
-                  className="flex items-center justify-center w-full px-4 py-2 rounded-lg text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium text-sm"
+                  className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium text-sm group"
                 >
-                  <Settings className="h-4 w-4 mr-2" />
-                  Settings
+                  <Settings className="h-4 w-4 group-hover:scale-110 transition-transform" />
+                  <span>Settings</span>
                 </button>
+                
+                <div className="h-px bg-border mx-2 my-2"></div>
+                
                 <button
                   onClick={handleLogout}
-                  className="flex items-center justify-center w-full px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-all duration-300 mx-2 font-semibold text-sm mt-2"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 transition-all duration-300 mx-2 font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Logout
+                  <LogOut className="h-4 w-4" />
+                  <span>Logout</span>
                 </button>
               </>
             ) : (
-              <a
-                href="/login"
-                className="flex items-center justify-center px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 mx-2 font-semibold text-sm btn-shine"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Login
-              </a>
+              <>
+                <div className="h-px bg-border mx-2 my-2"></div>
+                <a
+                  href="/login"
+                  className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-primary to-accent text-primary-foreground hover:shadow-lg transition-all duration-300 mx-2 font-semibold text-sm btn-shine hover:scale-[1.02] active:scale-[0.98]"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <User className="h-4 w-4" />
+                  <span>Login</span>
+                </a>
+              </>
             )}
           </div>
         )}

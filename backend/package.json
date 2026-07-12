@@ -6,7 +6,12 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "seed:events": "node seed.js",
+    "seed:organizers": "node seed-organizers.js",
+    "seed:clubs": "node seed-clubs.js",
+    "seed:all": "node create-admin.js && node seed-clubs.js && node seed-organizers.js && node seed.js",
+    "create-admin": "node create-admin.js"
   },
   "keywords": [
     "nodejs",
