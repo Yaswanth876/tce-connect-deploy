@@ -1,6 +1,8 @@
 import { Home, Calendar, MessageCircle, User, LayoutDashboard } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useAuth } from "@/lib/auth";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { getUserRole } from "@/lib/auth";
 
 const navItems = [
   { icon: Home, label: "Home", path: "/" },
@@ -9,18 +11,44 @@ const navItems = [
 ];
 
 export const BottomNav = () => {
-  const { isAuthenticated, user } = useAuth();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const location = useLocation();
+
+  const checkAuth = () => {
+    const authStatus = localStorage.getItem("tce_isAuthenticated");
+    setIsAuthenticated(authStatus === "true");
+    setUserRole(getUserRole());
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, [location]);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      checkAuth();
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("focus", checkAuth);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("focus", checkAuth);
+    };
+  }, []);
   
   // Add profile/dashboard link if authenticated
   const allNavItems = isAuthenticated 
     ? [
         ...navItems,
         { 
-          icon: user?.role === 'student' ? User : LayoutDashboard, 
-          label: user?.role === 'student' ? 'Profile' : 'Dashboard', 
-          path: user?.role === 'student' ? '/profile' : 
-                user?.role === 'organizer' ? '/organizer/dashboard' : 
-                user?.role === 'admin' ? '/admin/dashboard' : '/profile' 
+          icon: userRole === 'student' ? User : LayoutDashboard, 
+          label: userRole === 'student' ? 'Profile' : 'Dashboard', 
+          path: userRole === 'student' ? '/profile' : 
+                userRole === 'organizer' ? '/organizer/dashboard' : 
+                userRole === 'admin' ? '/admin/dashboard' : '/profile' 
         }
       ]
     : navItems;
