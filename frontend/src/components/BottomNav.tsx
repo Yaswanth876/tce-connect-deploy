@@ -1,11 +1,10 @@
-import { Home, Calendar, MessageCircle, User, LayoutDashboard } from "lucide-react";
+import { Calendar, MessageCircle, User, LayoutDashboard } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getUserRole } from "@/lib/auth";
 
 const navItems = [
-  { icon: Home, label: "Home", path: "/" },
   { icon: Calendar, label: "Events", path: "/events" },
   { icon: MessageCircle, label: "Clubs", path: "/community" },
 ];

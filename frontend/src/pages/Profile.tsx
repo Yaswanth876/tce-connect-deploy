@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BottomNav } from "@/components/BottomNav";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import API_BASE_URL from "@/config/api";
@@ -176,7 +175,6 @@ const Profile = () => {
 
         <BottomNav />
       </div>
-      <Footer />
     </div>
   );
 };

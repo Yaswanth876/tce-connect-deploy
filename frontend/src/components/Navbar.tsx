@@ -1,4 +1,4 @@
-import { Home, Calendar, MessageCircle, Menu, X, User, LogOut, Settings, LayoutDashboard } from "lucide-react";
+import { Calendar, MessageCircle, Menu, X, User, LogOut, Settings, LayoutDashboard } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -15,7 +15,6 @@ import { toast } from "sonner";
 import { clearAuth, getUserRole } from "@/lib/auth";
 
 const navItems = [
-  { icon: Home, label: "Home", path: "/" },
   { icon: Calendar, label: "Events", path: "/events" },
   { icon: MessageCircle, label: "Clubs", path: "/community" },
 ];
@@ -27,6 +26,11 @@ export const Navbar = () => {
   const [userRole, setUserRole] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const logoPath = isAuthenticated
+    ? userRole === "organizer"
+      ? "/organizer-dashboard"
+      : "/student-dashboard"
+    : "/login";
 
   const checkAuth = () => {
     const authStatus = localStorage.getItem("tce_isAuthenticated");
@@ -86,7 +90,7 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo - Enhanced for Mobile */}
-          <a href="/" className="flex items-center gap-1.5 sm:gap-2 group">
+          <a href={logoPath} className="flex items-center gap-1.5 sm:gap-2 group">
             <div className="relative">
               <div className="absolute inset-0 bg-primary/10 rounded-full blur-md group-hover:bg-primary/20 transition-all"></div>
               <img 

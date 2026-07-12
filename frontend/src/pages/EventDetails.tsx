@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { BottomNav } from "@/components/BottomNav";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -738,7 +737,6 @@ export default function EventDetails() {
         <div className="flex-1 flex items-center justify-center">
           <p>Loading event...</p>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -754,7 +752,6 @@ export default function EventDetails() {
             <Button onClick={() => navigate("/events")}>Back to Events</Button>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -1047,7 +1044,6 @@ export default function EventDetails() {
 
         <BottomNav />
       </div>
-      <Footer />
     </div>
   );
 }

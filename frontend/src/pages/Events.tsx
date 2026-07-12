@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { EventCard } from "@/components/EventCard";
 import { BottomNav } from "@/components/BottomNav";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import API_BASE_URL from "@/config/api";
@@ -151,7 +150,6 @@ const Events = () => {
 
         <BottomNav />
       </div>
-      <Footer />
     </div>
   );
 };

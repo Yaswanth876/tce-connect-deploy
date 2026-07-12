@@ -1,7 +1,6 @@
 import { ClubCard } from "@/components/ClubCard";
 import { BottomNav } from "@/components/BottomNav";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { Bot, Code2, Glasses, Smartphone, Music, User, Palette, Book, BookOpen, Film, Plane, Radio, Sparkles, Drama, Handshake, Users } from "lucide-react";
 
 const allClubs = [
@@ -156,7 +155,6 @@ const Community = () => {
 
         <BottomNav />
       </div>
-      <Footer />
     </div>
   );
 };

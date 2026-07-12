@@ -279,20 +279,6 @@ export default function Login() {
           </div>
         </Card>
 
-        {/* Footer Note */}
-        <p
-          className="text-center text-xs sm:text-sm text-muted-foreground mt-4 sm:mt-6 px-4 animate-fade-in"
-          style={{ animationDelay: "0.4s" }}
-        >
-          By signing in, you agree to our{" "}
-          <a href="#" className="text-primary hover:underline">
-            Terms of Service
-          </a>{" "}
-          and{" "}
-          <a href="#" className="text-primary hover:underline">
-            Privacy Policy
-          </a>
-        </p>
       </div>
     </div>
   );

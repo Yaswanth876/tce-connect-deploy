@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -50,7 +49,6 @@ export default function OrganizerDashboard() {
     })
       .then(res => res.json())
       .then(data => {
-        // Filter events where current user is organizer
         const userId = localStorage.getItem("tce_user_id");
         const myEvents = data.filter((event: any) => 
           event.organizer?._id === userId || event.organizer === userId
@@ -836,8 +834,6 @@ export default function OrganizerDashboard() {
           </div>
         </DialogContent>
       </Dialog>
-
-      <Footer />
     </div>
   );
 }
