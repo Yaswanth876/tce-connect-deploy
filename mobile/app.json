@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "TCE Connect",
+    "slug": "tce-connect",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "tceconnect",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "edu.tce.connect"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#802020"
+      },
+      "package": "edu.tce.connect",
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-secure-store"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
