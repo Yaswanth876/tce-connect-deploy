@@ -18,9 +18,9 @@ export default function Register() {
   const [registerNumber, setRegisterNumber] = useState("");
   const [role, setRole] = useState("student");
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({ 
-    name: "", 
-    email: "", 
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
     password: "",
     confirmPassword: "",
     department: "",
@@ -35,10 +35,10 @@ export default function Register() {
   };
 
   const validateForm = (): boolean => {
-    const newErrors = { 
-      name: "", 
-      email: "", 
-      password: "", 
+    const newErrors = {
+      name: "",
+      email: "",
+      password: "",
       confirmPassword: "",
       department: "",
       year: "",
@@ -98,33 +98,33 @@ export default function Register() {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Clear previous errors
-    setErrors({ 
-      name: "", 
-      email: "", 
-      password: "", 
+    setErrors({
+      name: "",
+      email: "",
+      password: "",
       confirmPassword: "",
       department: "",
       year: "",
       registerNumber: ""
     });
-    
+
     // Validate form
     if (!validateForm()) {
       return;
     }
-    
+
     setIsLoading(true);
-    
+
     try {
       const response = await fetch(`${API_BASE_URL}/users/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          name, 
-          email, 
-          password, 
+        body: JSON.stringify({
+          name,
+          email,
+          password,
           role,
           department,
           year,
@@ -132,16 +132,16 @@ export default function Register() {
         })
       });
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.message || data.error || "Registration failed");
       }
-      
+
       setIsLoading(false);
       toast.success("Registration successful!", {
         description: "You can now login with your credentials.",
       });
-      
+
       // Navigate after a short delay
       setTimeout(() => navigate("/login"), 1000);
     } catch (err: any) {
@@ -196,19 +196,18 @@ export default function Register() {
                 <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input 
-                    id="name" 
+                  <Input
+                    id="name"
                     placeholder="Enter your full name"
-                    value={name} 
+                    value={name}
                     onChange={e => {
                       setName(e.target.value);
                       setErrors(prev => ({ ...prev, name: "" }));
                     }}
-                    className={`pl-10 h-11 transition-colors ${
-                      errors.name 
-                        ? "border-red-500 focus:border-red-500" 
+                    className={`pl-10 h-11 transition-colors ${errors.name
+                        ? "border-red-500 focus:border-red-500"
                         : "border-border focus:border-primary"
-                    }`}
+                      }`}
                     disabled={isLoading}
                     aria-invalid={!!errors.name}
                   />
@@ -225,20 +224,19 @@ export default function Register() {
                 <Label htmlFor="email" className="text-sm font-medium">Email Address</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input 
-                    id="email" 
+                  <Input
+                    id="email"
                     type="email"
                     placeholder="your@student.tce.edu"
-                    value={email} 
+                    value={email}
                     onChange={e => {
                       setEmail(e.target.value);
                       setErrors(prev => ({ ...prev, email: "" }));
                     }}
-                    className={`pl-10 h-11 transition-colors ${
-                      errors.email 
-                        ? "border-red-500 focus:border-red-500" 
+                    className={`pl-10 h-11 transition-colors ${errors.email
+                        ? "border-red-500 focus:border-red-500"
                         : "border-border focus:border-primary"
-                    }`}
+                      }`}
                     disabled={isLoading}
                     aria-invalid={!!errors.email}
                   />
@@ -255,20 +253,19 @@ export default function Register() {
                 <Label htmlFor="password" className="text-sm font-medium">Password</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input 
-                    id="password" 
+                  <Input
+                    id="password"
                     type="password"
                     placeholder="Create a password (min 6 characters)"
-                    value={password} 
+                    value={password}
                     onChange={e => {
                       setPassword(e.target.value);
                       setErrors(prev => ({ ...prev, password: "" }));
                     }}
-                    className={`pl-10 h-11 transition-colors ${
-                      errors.password 
-                        ? "border-red-500 focus:border-red-500" 
+                    className={`pl-10 h-11 transition-colors ${errors.password
+                        ? "border-red-500 focus:border-red-500"
                         : "border-border focus:border-primary"
-                    }`}
+                      }`}
                     disabled={isLoading}
                     aria-invalid={!!errors.password}
                   />
@@ -285,20 +282,19 @@ export default function Register() {
                 <Label htmlFor="confirmPassword" className="text-sm font-medium">Confirm Password</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input 
-                    id="confirmPassword" 
+                  <Input
+                    id="confirmPassword"
                     type="password"
                     placeholder="Confirm your password"
-                    value={confirmPassword} 
+                    value={confirmPassword}
                     onChange={e => {
                       setConfirmPassword(e.target.value);
                       setErrors(prev => ({ ...prev, confirmPassword: "" }));
                     }}
-                    className={`pl-10 h-11 transition-colors ${
-                      errors.confirmPassword 
-                        ? "border-red-500 focus:border-red-500" 
+                    className={`pl-10 h-11 transition-colors ${errors.confirmPassword
+                        ? "border-red-500 focus:border-red-500"
                         : "border-border focus:border-primary"
-                    }`}
+                      }`}
                     disabled={isLoading}
                     aria-invalid={!!errors.confirmPassword}
                   />
@@ -313,10 +309,10 @@ export default function Register() {
               {/* Role Selection */}
               <div className="space-y-2">
                 <Label htmlFor="role" className="text-sm font-medium">I am a</Label>
-                <select 
-                  id="role" 
-                  value={role} 
-                  onChange={e => setRole(e.target.value)} 
+                <select
+                  id="role"
+                  value={role}
+                  onChange={e => setRole(e.target.value)}
                   className="w-full h-11 border border-border rounded-md px-3 focus:border-primary transition-colors disabled:opacity-50"
                   disabled={isLoading}
                 >
@@ -333,19 +329,18 @@ export default function Register() {
                     <Label htmlFor="department" className="text-sm font-medium">Department</Label>
                     <div className="relative">
                       <Building className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input 
-                        id="department" 
+                      <Input
+                        id="department"
                         placeholder="e.g., Computer Science & Engineering"
-                        value={department} 
+                        value={department}
                         onChange={e => {
                           setDepartment(e.target.value);
                           setErrors(prev => ({ ...prev, department: "" }));
                         }}
-                        className={`pl-10 h-11 transition-colors ${
-                          errors.department 
-                            ? "border-red-500 focus:border-red-500" 
+                        className={`pl-10 h-11 transition-colors ${errors.department
+                            ? "border-red-500 focus:border-red-500"
                             : "border-border focus:border-primary"
-                        }`}
+                          }`}
                         disabled={isLoading}
                         aria-invalid={!!errors.department}
                       />
@@ -362,18 +357,17 @@ export default function Register() {
                     <Label htmlFor="year" className="text-sm font-medium">Year of Study</Label>
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <select 
-                        id="year" 
-                        value={year} 
+                      <select
+                        id="year"
+                        value={year}
                         onChange={e => {
                           setYear(e.target.value);
                           setErrors(prev => ({ ...prev, year: "" }));
                         }}
-                        className={`w-full h-11 border rounded-md px-3 pl-10 transition-colors disabled:opacity-50 ${
-                          errors.year 
-                            ? "border-red-500 focus:border-red-500" 
+                        className={`w-full h-11 border rounded-md px-3 pl-10 transition-colors disabled:opacity-50 ${errors.year
+                            ? "border-red-500 focus:border-red-500"
                             : "border-border focus:border-primary"
-                        }`}
+                          }`}
                         disabled={isLoading}
                         aria-invalid={!!errors.year}
                       >
@@ -396,19 +390,18 @@ export default function Register() {
                     <Label htmlFor="registerNumber" className="text-sm font-medium">Register Number</Label>
                     <div className="relative">
                       <Hash className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input 
-                        id="registerNumber" 
+                      <Input
+                        id="registerNumber"
                         placeholder="e.g., 21CS045"
-                        value={registerNumber} 
+                        value={registerNumber}
                         onChange={e => {
                           setRegisterNumber(e.target.value);
                           setErrors(prev => ({ ...prev, registerNumber: "" }));
                         }}
-                        className={`pl-10 h-11 transition-colors ${
-                          errors.registerNumber 
-                            ? "border-red-500 focus:border-red-500" 
+                        className={`pl-10 h-11 transition-colors ${errors.registerNumber
+                            ? "border-red-500 focus:border-red-500"
                             : "border-border focus:border-primary"
-                        }`}
+                          }`}
                         disabled={isLoading}
                         aria-invalid={!!errors.registerNumber}
                       />
@@ -423,9 +416,9 @@ export default function Register() {
               )}
 
               {/* Submit Button */}
-              <Button 
-                type="submit" 
-                className="w-full h-11 font-semibold btn-shine disabled:opacity-70" 
+              <Button
+                type="submit"
+                className="w-full h-11 font-semibold btn-shine disabled:opacity-70"
                 disabled={isLoading}
               >
                 {isLoading ? (

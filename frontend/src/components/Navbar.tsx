@@ -1,7 +1,7 @@
 import { Calendar, MessageCircle, Menu, X, User, LogOut, Settings, LayoutDashboard } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,10 +14,7 @@ import {
 import { toast } from "sonner";
 import { clearAuth, getUserRole } from "@/lib/auth";
 
-const navItems = [
-  { icon: Calendar, label: "Events", path: "/events" },
-  { icon: MessageCircle, label: "Clubs", path: "/community" },
-];
+const navItems: { icon: any; label: string; path: string }[] = [];
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -53,7 +50,7 @@ export const Navbar = () => {
     };
 
     window.addEventListener("storage", handleStorageChange);
-    
+
     // Also check on navigation/focus
     window.addEventListener("focus", checkAuth);
 
@@ -65,11 +62,11 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     clearAuth();
-    
+
     toast.success("Logged out successfully", {
       description: "See you again soon!",
     });
-    
+
     setIsAuthenticated(false);
     setMobileMenuOpen(false);
     navigate("/login");
@@ -90,12 +87,12 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo - Enhanced for Mobile */}
-          <a href={logoPath} className="flex items-center gap-1.5 sm:gap-2 group">
+          <Link to="/events" className="flex items-center gap-1.5 sm:gap-2 group cursor-pointer">
             <div className="relative">
               <div className="absolute inset-0 bg-primary/10 rounded-full blur-md group-hover:bg-primary/20 transition-all"></div>
-              <img 
-                src="/tce-logo.png" 
-                alt="TCE Logo" 
+              <img
+                src="/tce-logo.png"
+                alt="TCE Logo"
                 className="h-8 w-8 sm:h-10 sm:w-10 object-contain relative z-10 group-hover:scale-110 transition-transform duration-300"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
@@ -106,7 +103,7 @@ export const Navbar = () => {
               <span className="text-primary group-hover:scale-110 transition-transform duration-300">TCE</span>
               <span className="text-foreground transition-all duration-300 hidden xs:inline">Connect</span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation - Improved */}
           <div className="hidden md:flex items-center gap-2">
@@ -121,13 +118,12 @@ export const Navbar = () => {
                 <span>{item.label}</span>
               </NavLink>
             ))}
-            
+
             {isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
-                    variant="outline"
-                    className="ml-2 px-4 py-1.5 rounded-lg border-primary/30 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-semibold text-sm"
+                    className="ml-2"
                   >
                     <User className="h-4 w-4 mr-2" />
                     Profile
@@ -161,12 +157,9 @@ export const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <a
-                href="/login"
-                className="ml-2 px-5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 font-semibold border border-primary text-sm btn-shine"
-              >
-                Login
-              </a>
+              <Button asChild className="ml-2">
+                <a href="/login">Login</a>
+              </Button>
             )}
           </div>
 
@@ -229,11 +222,11 @@ export const Navbar = () => {
                 <span>{item.label}</span>
               </NavLink>
             ))}
-            
+
             {isAuthenticated ? (
               <>
                 <div className="h-px bg-border mx-2 my-2"></div>
-                
+
                 <button
                   onClick={handleDashboard}
                   className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium text-sm group"
@@ -261,9 +254,9 @@ export const Navbar = () => {
                   <Settings className="h-4 w-4 group-hover:scale-110 transition-transform" />
                   <span>Settings</span>
                 </button>
-                
+
                 <div className="h-px bg-border mx-2 my-2"></div>
-                
+
                 <button
                   onClick={handleLogout}
                   className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 transition-all duration-300 mx-2 font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"

@@ -189,42 +189,6 @@ All colors MUST be HSL.
   }
   
   /* Button enhancements */
-  button, .btn {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  button:hover, .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(128, 32, 32, 0.2);
-  }
-  
-  button:active, .btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(128, 32, 32, 0.15);
-  }
-  
-  /* Button ripple effect */
-  button::before, .btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-  }
-  
-  button:active::before, .btn:active::before {
-    width: 300px;
-    height: 300px;
-  }
-  
-  /* Button hover animations */
   .btn-bounce:hover {
     animation: btnBounce 0.5s ease;
   }

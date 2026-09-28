@@ -157,8 +157,7 @@ const Profile = () => {
 
           {/* Logout */}
           <Button
-            variant="destructive"
-            className="w-full lg:max-w-xs transition-all duration-200 hover:scale-105 shadow-lg"
+            className="w-full lg:max-w-xs"
             onClick={() => {
               // simple client-side logout
               localStorage.removeItem('tce_isAuthenticated');

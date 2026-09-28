@@ -12,7 +12,7 @@ export default function StudentDashboard() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("tce_user_email");
   const token = localStorage.getItem("tce_token");
-  
+
   const [registeredEvents, setRegisteredEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -128,12 +128,12 @@ export default function StudentDashboard() {
                 Browse Events
               </Button>
               <Button
-                onClick={() => navigate("/community")}
+                onClick={() => navigate("/profile")}
                 className="h-auto py-4 justify-start"
                 variant="outline"
               >
                 <Users className="h-5 w-5 mr-2" />
-                Explore Clubs
+                View Profile
               </Button>
             </div>
           </Card>
@@ -141,7 +141,7 @@ export default function StudentDashboard() {
           {/* Upcoming Events */}
           <Card className="p-6">
             <h2 className="text-xl font-semibold mb-4">My Upcoming Events</h2>
-            
+
             {upcomingEvents.length === 0 ? (
               <>
                 <p className="text-muted-foreground">

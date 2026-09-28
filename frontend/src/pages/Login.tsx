@@ -49,17 +49,17 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Clear previous errors
     setErrors({ email: "", password: "" });
-    
+
     // Validate form
     if (!validateForm()) {
       return;
     }
-    
+
     setIsLoading(true);
-    
+
     try {
       const response = await fetch(`${API_BASE_URL}/users/login`, {
         method: "POST",
@@ -67,11 +67,11 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.message || data.error || "Login failed");
       }
-      
+
       // Store auth data
       localStorage.setItem("tce_token", data.token);
       localStorage.setItem("tce_isAuthenticated", "true");
@@ -79,14 +79,14 @@ export default function Login() {
       localStorage.setItem("tce_user_role", data.user.role);
       localStorage.setItem("tce_user_id", data.user.id);
       window.dispatchEvent(new Event("storage"));
-      
+
       // Show success toast
       toast.success("Login successful!", {
         description: `Welcome back, ${data.user.email}`,
       });
-      
+
       setIsLoading(false);
-      
+
       // Redirect to the page they were trying to access, or dashboard
       const from = (location.state as any)?.from?.pathname;
       const targetPath = from || (
@@ -165,11 +165,10 @@ export default function Login() {
                       setEmail(e.target.value);
                       setErrors(prev => ({ ...prev, email: "" }));
                     }}
-                    className={`pl-10 h-11 transition-colors ${
-                      errors.email 
-                        ? "border-red-500 focus:border-red-500" 
+                    className={`pl-10 h-11 transition-colors ${errors.email
+                        ? "border-red-500 focus:border-red-500"
                         : "border-border focus:border-primary"
-                    }`}
+                      }`}
                     disabled={isLoading}
                     aria-invalid={!!errors.email}
                     aria-describedby={errors.email ? "email-error" : undefined}
@@ -198,11 +197,10 @@ export default function Login() {
                       setPassword(e.target.value);
                       setErrors(prev => ({ ...prev, password: "" }));
                     }}
-                    className={`pl-10 pr-10 h-11 transition-colors ${
-                      errors.password 
-                        ? "border-red-500 focus:border-red-500" 
+                    className={`pl-10 pr-10 h-11 transition-colors ${errors.password
+                        ? "border-red-500 focus:border-red-500"
                         : "border-border focus:border-primary"
-                    }`}
+                      }`}
                     disabled={isLoading}
                     aria-invalid={!!errors.password}
                     aria-describedby={errors.password ? "password-error" : undefined}
@@ -249,7 +247,8 @@ export default function Login() {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 font-semibold text-base btn-shine disabled:opacity-70 disabled:cursor-not-allowed"
+                size="lg"
+                className="w-full font-semibold btn-shine disabled:opacity-70 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -268,8 +267,8 @@ export default function Login() {
               {/* Register Link */}
               <p className="text-center text-sm text-muted-foreground">
                 Don't have an account?{" "}
-                <a 
-                  href="/register" 
+                <a
+                  href="/register"
                   className="text-primary hover:underline font-medium transition-colors"
                 >
                   Create one

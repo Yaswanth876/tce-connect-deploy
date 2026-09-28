@@ -147,8 +147,7 @@ export default function AdminDashboard() {
             </div>
             <Button
               onClick={handleLogout}
-              variant="outline"
-              className="flex items-center gap-2 hover:bg-destructive/10 hover:text-destructive transition-colors"
+              className="flex items-center gap-2"
             >
               <LogOut className="h-4 w-4" />
               Logout

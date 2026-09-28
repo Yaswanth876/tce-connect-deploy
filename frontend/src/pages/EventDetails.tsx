@@ -781,7 +781,6 @@ export default function EventDetails() {
         {/* Back Button */}
         <div className="max-w-5xl mx-auto px-4 lg:px-6 pt-4">
           <Button
-            variant="ghost"
             onClick={() => navigate("/events")}
             className="mb-4"
           >
@@ -970,8 +969,7 @@ export default function EventDetails() {
                           </p>
                         </div>
                         <Button
-                          variant="outline"
-                          className="w-full text-red-600 hover:text-red-700"
+                          className="w-full"
                           onClick={handleRegister}
                           disabled={registering}
                         >

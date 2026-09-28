@@ -652,17 +652,14 @@ export default function OrganizerDashboard() {
                     <div className="flex gap-2 ml-4">
                       <Button 
                         size="sm" 
-                        variant="outline"
                         onClick={() => openParticipantsList(event)}
                         disabled={loading}
                         title="View participants"
-                        className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
                       >
                         <Eye className="h-4 w-4" />
                       </Button>
                       <Button 
                         size="sm" 
-                        variant="outline"
                         onClick={() => openEditForm(event)}
                         disabled={loading}
                         title="Edit event"
@@ -671,10 +668,8 @@ export default function OrganizerDashboard() {
                       </Button>
                       <Button 
                         size="sm" 
-                        variant="outline"
                         onClick={() => handleDeleteEvent(event._id)}
                         disabled={loading}
-                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
                         title="Delete event"
                       >
                         <Trash2 className="h-4 w-4" />

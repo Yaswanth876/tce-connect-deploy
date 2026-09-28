@@ -6,7 +6,6 @@ import { getUserRole } from "@/lib/auth";
 
 const navItems = [
   { icon: Calendar, label: "Events", path: "/events" },
-  { icon: MessageCircle, label: "Clubs", path: "/community" },
 ];
 
 export const BottomNav = () => {
@@ -37,19 +36,19 @@ export const BottomNav = () => {
       window.removeEventListener("focus", checkAuth);
     };
   }, []);
-  
+
   // Add profile/dashboard link if authenticated
-  const allNavItems = isAuthenticated 
+  const allNavItems = isAuthenticated
     ? [
-        ...navItems,
-        { 
-          icon: userRole === 'student' ? User : LayoutDashboard, 
-          label: userRole === 'student' ? 'Profile' : 'Dashboard', 
-          path: userRole === 'student' ? '/profile' : 
-                userRole === 'organizer' ? '/organizer/dashboard' : 
-                userRole === 'admin' ? '/admin/dashboard' : '/profile' 
-        }
-      ]
+      ...navItems,
+      {
+        icon: userRole === 'student' ? User : LayoutDashboard,
+        label: userRole === 'student' ? 'Profile' : 'Dashboard',
+        path: userRole === 'student' ? '/profile' :
+          userRole === 'organizer' ? '/organizer/dashboard' :
+            userRole === 'admin' ? '/admin/dashboard' : '/profile'
+      }
+    ]
     : navItems;
 
   return (
@@ -67,7 +66,7 @@ export const BottomNav = () => {
             >
               {/* Active Indicator */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-gradient-to-r from-primary to-accent transition-all duration-300 rounded-full group-[.active]:w-8"></div>
-              
+
               {/* Icon with badge for authenticated users on profile/dashboard */}
               <div className="relative">
                 <item.icon className="h-6 w-6 group-hover:scale-110 group-[.active]:scale-110 group-hover:-translate-y-0.5 transition-all duration-300 group-[.active]:text-primary" />
@@ -75,7 +74,7 @@ export const BottomNav = () => {
                   <span className="absolute -top-1 -right-1 h-2 w-2 bg-green-500 rounded-full border border-white animate-pulse"></span>
                 )}
               </div>
-              
+
               {/* Label */}
               <span className="text-[10px] xs:text-xs font-medium group-hover:font-semibold group-[.active]:font-bold transition-all group-[.active]:text-primary truncate max-w-full">
                 {item.label}
@@ -84,7 +83,7 @@ export const BottomNav = () => {
           );
         })}
       </div>
-      
+
       {/* Spacer for notched phones */}
       <div className="h-safe-area-inset-bottom bg-white/95 backdrop-blur-lg"></div>
     </nav>
